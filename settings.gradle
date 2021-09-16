@@ -1,0 +1,2 @@
+rootProject.name = "NativeContentProviderEx1"
+include ':app'
