@@ -128,10 +128,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private Loader<Cursor> contactsLoader() {
-        Uri contactsUri = ContactsContract.Contacts.CONTENT_URI; // The content URI of the phone contacts
+        Uri contactsUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI; // The content URI of the phone contacts
 
         String[] projection = {                                  // The columns to return for each row
-                ContactsContract.Contacts.DISPLAY_NAME
+                ContactsContract.Contacts.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER
         };
 
         String selection = null;                                 //Selection criteria
@@ -156,8 +157,8 @@ public class MainActivity extends AppCompatActivity
             do {
                 String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
-                //String sdt = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.PHONETIC_NAME));
-                contacts.add(name);
+                String sdt = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                contacts.add(name + " - " + sdt);
             } while (cursor.moveToNext());
         }
 
